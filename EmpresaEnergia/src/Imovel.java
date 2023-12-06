@@ -28,6 +28,7 @@ public class Imovel {
 	// metodo atualiza os valores de ultLeitura e penLeitura
 	public int realizarLeitura(int leituraAtual) {
 		int gasto = leituraAtual - this.ultLeitura;
+		faturas.add(new Fatura(this.ultLeitura, this.penLeitura));
 		this.penLeitura = this.ultLeitura;
 		this.ultLeitura = leituraAtual;
 		return gasto;
