@@ -1,49 +1,51 @@
 package EmpresaEnergia.src;
 
-
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Fatura {
-	
-	private Date data;
+	private static float valorPorKwh = 10;
+	private LocalDate data;
 	private float valor;
-	private boolean quitacao;
-	protected Imovel imovel;
+	private boolean quitado;
+	private int ultimaLeitura;
+	private int penultimaLeitura;
+
+	// construtor
+	public Fatura(int ultimaLeitura, int penultimaLeitura) {
+		this.data = LocalDate.now();
+		this.ultimaLeitura = ultimaLeitura;
+		this.penultimaLeitura = penultimaLeitura;
+		this.valor = (ultimaLeitura - penultimaLeitura) * valorPorKwh;
+		this.quitado = false;
+	}
    
 
-	//Gets e Sets
-	public Date getData() {
+	// getters
+	// atributos nao possuem setters pois sao inicializados no construtor e nao devem ser alterados
+	public LocalDate getData() {
 		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
 	}
 
 	public float getValor() {
 		return valor;
 	}
 
-	public void setValor(float valor) {
-		this.valor = valor;
+	public boolean isQuitado() {
+		return quitado;
 	}
 
-	public boolean isQuitacao() {
-		return quitacao;
+	public int getUltimaLeitura() {
+		return ultimaLeitura;
 	}
 
-	public void setQuitacao(boolean quitacao) {
-		this.quitacao = quitacao;
-	}
-	
-	public Imovel getImovel() {
-		return imovel;
+	public int getPenultimaLeitura() {
+		return penultimaLeitura;
 	}
 
-	public void setImovel(Imovel imovel) {
-		this.imovel = imovel;
+	// setters
+	public void quitarFatura() {
+		this.quitado = true;
 	}
-	
 	
 	
 }
