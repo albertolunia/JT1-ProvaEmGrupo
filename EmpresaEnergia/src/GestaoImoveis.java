@@ -6,7 +6,10 @@ public class GestaoImoveis {
     static ArrayList<Imovel> imoveis = new ArrayList<>();
 
     public static boolean addImovel(Imovel imovel) {
-        return imoveis.add(imovel);
+        if (getImovel(imovel.getMatricula()) != null)
+            return false;
+        else
+            return imoveis.add(imovel);
     }
 
     public static boolean removeImovel(Imovel imovel) {
@@ -19,9 +22,8 @@ public class GestaoImoveis {
 
     public static Imovel getImovel(String matricula) {
         for (Imovel imovel : imoveis) {
-            if (imovel.getMatricula().equals(matricula)) {
+            if (imovel.getMatricula().equals(matricula))
                 return imovel;
-            }
         }
         return null;
     }

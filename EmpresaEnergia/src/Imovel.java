@@ -35,19 +35,17 @@ public class Imovel {
 	}
 	
 	//Gets e Sets
-	public String getMatricula() {
-		return matricula;
-	}
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
-	}
 	public String getEndereco() {
 		return endereco;
 	}
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
+	
+	// nao existe set para matricula pois ela nao pode ser alterada
+	public String getMatricula() {
+		return matricula;
+	}
 	// nao existe set para ultLeitura e penLeitura pois eles sao atualizados pelo metodo realizarLeitura
 	public int getUltLeitura() {
 		return ultLeitura;

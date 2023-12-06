@@ -6,196 +6,276 @@ import java.util.Scanner;
 public class Menus {
 
     public static void menuPrincipal() {
+        int opcao;
+        Scanner scanner = new Scanner(System.in);
         do{
             System.out.println("Menu Principal:\n");
-            System.out.println("1. menuClientes()");
-            System.out.println("2. menuImoveis()");
-            System.out.println("3. menuFaturas()");
-            System.out.println("4. menuPagamentos()");
-            System.out.println("5. menuFalha()");
+            System.out.println("1. Menu Clientes");
+            System.out.println("2. Menu Imoveis");
+            System.out.println("3. Menu Faturas");
+            System.out.println("4. Menu Pagamentos");
+            System.out.println("5. Menu Falha");
             System.out.println("6. Sair");
 
+            System.out.print("\nDigite a opção desejada: ");
             try{
-                Scanner scanner = new Scanner(System.in);
-                System.out.print("\nDigite a opção desejada: ");
-                int opcao = scanner.nextInt();
-                switch (opcao) {
-                    case 1:
-                        menuClientes();
-                        break;
-                    case 2:
-                        menuImoveis();
-                        break;
-                    case 3:
-                        menuFaturas();
-                        break;
-                    case 4:
-                        menuPagamentos();
-                        break;
-                    case 5:
-                        menuFalha();
-                        break;
-                    case 6:
-                        System.exit(0);
-                        break;
-                    default:
-                        System.out.println("Escolha invalida, tente novamente.");
-                        menuPrincipal();
-                        break;
-                }
+                opcao = scanner.nextInt();
+                scanner.nextLine();
             }
             catch(Exception e){
                 System.out.println("\n-----Erro de digitação-----\n");
+                continue;
+            }
+            switch (opcao) {
+                case 1:
+                    menuClientes(scanner);
+                    break;
+                case 2:
+                    menuImoveis(scanner);
+                    break;
+                case 3:
+                    menuFaturas();
+                    break;
+                case 4:
+                    menuPagamentos();
+                    break;
+                case 5:
+                    menuFalha();
+                    break;
+                case 6:
+                    scanner.close();
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Escolha invalida, tente novamente.");
+                    menuPrincipal();
+                    break;
             }
         }while(true);
     }
 
-    public static void menuClientes() {
-        System.out.println("\nMenu Cliente:\n");
-        System.out.println("1. Incluir");
-        System.out.println("2. Adicionar imovel");
-        System.out.println("3. Consultar");
-        System.out.println("4. Listar");
-        System.out.println("5. Excluir");
-        System.out.println("6. Alterar");
-        System.out.println("7. Voltar");
+    public static void menuClientes(Scanner scanner){
+        do{
+            System.out.println("\nMenu Cliente:\n");
+            System.out.println("1. Incluir");
+            System.out.println("2. Adicionar imovel");
+            System.out.println("3. Consultar");
+            System.out.println("4. Listar");
+            System.out.println("5. Excluir");
+            System.out.println("6. Alterar");
+            System.out.println("7. Voltar");
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("\nDigite a opção desejada: ");
-        int opcao = scanner.nextInt();
+            System.out.print("\nDigite a opção desejada: ");
+            int opcao = scanner.nextInt();
+            scanner.nextLine();
 
-        switch (opcao) {
-            case 1:
-                System.out.println("\nDigite o CPF do cliente:");
-                String cpf = scanner.next();
-                System.out.println("Digite o nome do cliente:");
-                String nome = scanner.next();
+            switch (opcao) {
+                case 1:
+                    System.out.println("\nDigite o CPF do cliente:");
+                    String cpf = scanner.nextLine();
+                    System.out.println("Digite o nome do cliente:");
+                    String nome = scanner.nextLine();
 
-                Cliente cliente = new Cliente(cpf, nome);
+                    Cliente cliente = new Cliente(cpf, nome);
 
-                if(GestaoClientes.addCliente(cliente)) {
-                    System.out.println("\nCliente adicionado com sucesso!");
-                } else {
-                    System.out.println("\nErro ao adicionar cliente!");
-                }
-
-                menuClientes();
-
-                break;
-            case 2:
-                System.out.println("\nDigite o CPF do cliente:");
-                String cpfCliente = scanner.next();
-
-                Cliente cliente1 = GestaoClientes.getCliente(cpfCliente);
-
-                if(cliente1 != null) {
-                    System.out.println("\nCliente encontrado!");
-                    System.out.println(cliente1.toString());
-
-                    System.out.println("\nDigite a matricula do imovel:");
-                    String matricula = scanner.next();
-
-                    //Aguardando a logica de imoveis
-                    /*Imovel imovel = GestaoImoveis.getIMovel(matricula);
-    
-                    if(cliente1.addImovel(imovel)) {
-                        System.out.println("\nImovel adicionado com sucesso!");
+                    if(GestaoClientes.addCliente(cliente)) {
+                        System.out.println("\nCliente adicionado com sucesso!");
                     } else {
-                        System.out.println("\nErro ao adicionar imovel!");
-                    }*/
-                } else {
-                    System.out.println("\nCliente não encontrado!");
-                }
-
-                menuClientes();
-                break;
-            case 3:
-
-                System.out.println("\nDigite o CPF do cliente:");
-                String cpfCliente1 = scanner.next();
-
-                Cliente cliente2 = GestaoClientes.getCliente(cpfCliente1);
-
-                if(cliente2 != null) {
-                    System.out.println("\nCliente encontrado!");
-                    System.out.println(cliente2.toString());
-                } else {
-                    System.out.println("\nCliente não encontrado!");
-                }
-
-                menuClientes();
-                break;
-            case 4:
-
-                System.out.println("\nLista de clientes: ");
-                GestaoClientes.ListarClientes();
-
-                menuClientes();
-                break;
-            case 5:
-
-                System.out.println("\nDigite o CPF do cliente:");
-                String cpfCliente3 = scanner.next();
-
-                Cliente cliente3 = GestaoClientes.getCliente(cpfCliente3);
-                if(cliente3 != null) {
-                    if(GestaoClientes.removeCliente(cliente3)) {
-                        System.out.println("\nCliente removido com sucesso!");
-                    } else {
-                        System.out.println("\nErro ao remover cliente!");
+                        System.out.println("\nErro ao adicionar cliente!");
                     }
-                } else {
-                    System.out.println("\nCliente não encontrado!");
-                }
 
-                menuClientes();
-                break;
-            case 6:
 
-                System.out.println("\nDigite o CPF do cliente:");
-                String cpfCliente4 = scanner.next();
+                    break;
+                case 2:
+                    System.out.println("\nDigite o CPF do cliente:");
+                    String cpfCliente = scanner.nextLine();
 
-                Cliente cliente4 = GestaoClientes.getCliente(cpfCliente4);
+                    Cliente cliente1 = GestaoClientes.getCliente(cpfCliente);
 
-                if(cliente4 != null) {
-                    System.out.println("\nCliente encontrado!");
-                    System.out.println(cliente4.toString());
+                    if(cliente1 != null) {
 
-                    System.out.println("\nDigite o novo CPF do cliente:");
-                    String novoCpf = scanner.next();
-                    System.out.println("\nDigite o novo nome do cliente:");
-                    String novoNome = scanner.next();
-    
-                    cliente4.alterarCliente(novoCpf, novoNome);
-    
-                    System.out.println("\nCliente alterado com sucesso!");
-                } else {
-                    System.out.println("\nCliente não encontrado!");
-                }
+                        System.out.println("\nDigite a matricula do imovel:");
+                        String matricula = scanner.nextLine();
 
-                menuClientes();
-                break;
-            case 7:
+                        
+                        Imovel imovel = GestaoImoveis.getImovel(matricula);
+        
+                        if (imovel == null) {
+                            System.out.println("\nImovel não encontrado!");
+                            break;
+                        }
 
-                menuPrincipal();
-                break;
+                        if(cliente1.addImovel(imovel)) {
+                            System.out.println("\nImovel adicionado com sucesso!");
+                        } else {
+                            System.out.println("\nErro ao adicionar imovel!");
+                        }
+                    } else {
+                        System.out.println("\nCliente não encontrado!");
+                    }
 
-            default:
+                    break;
+                case 3:
 
-                System.out.println("\nEscolha invalida, tente novamente");
-                menuClientes();
-                break;
-        }
+                    System.out.println("\nDigite o CPF do cliente:");
+                    String cpfCliente1 = scanner.nextLine();
+
+                    Cliente cliente2 = GestaoClientes.getCliente(cpfCliente1);
+
+                    if(cliente2 != null) {
+                        System.out.println("\nCliente encontrado!");
+                        System.out.println(cliente2.toString());
+                    } else {
+                        System.out.println("\nCliente não encontrado!");
+                    }
+
+                    break;
+                case 4:
+
+                    System.out.println("\nLista de clientes: ");
+                    GestaoClientes.ListarClientes();
+
+                    break;
+                case 5:
+
+                    System.out.println("\nDigite o CPF do cliente:");
+                    String cpfCliente3 = scanner.nextLine();
+
+                    Cliente cliente3 = GestaoClientes.getCliente(cpfCliente3);
+                    if(cliente3 != null) {
+                        if(GestaoClientes.removeCliente(cliente3)) {
+                            System.out.println("\nCliente removido com sucesso!");
+                        } else {
+                            System.out.println("\nErro ao remover cliente!");
+                        }
+                    } else {
+                        System.out.println("\nCliente não encontrado!");
+                    }
+                    break;
+                case 6:
+
+                    System.out.println("\nDigite o CPF do cliente:");
+                    String cpfCliente4 = scanner.nextLine();
+
+                    Cliente cliente4 = GestaoClientes.getCliente(cpfCliente4);
+
+                    if(cliente4 != null) {
+                        System.out.println("\nCliente encontrado!");
+                        System.out.println(cliente4.toString());
+
+                        System.out.println("\nDigite o novo CPF do cliente:");
+                        String novoCpf = scanner.nextLine();
+                        System.out.println("\nDigite o novo nome do cliente:");
+                        String novoNome = scanner.nextLine();
+        
+                        cliente4.alterarCliente(novoCpf, novoNome);
+        
+                        System.out.println("\nCliente alterado com sucesso!");
+                    } else {
+                        System.out.println("\nCliente não encontrado!");
+                    }
+                    break;
+                case 7:
+                    return;
+
+                default:
+                    System.out.println("\nEscolha invalida, tente novamente");
+                    break;
+            }
+        }while(true);
     }
 
-    public static void menuImoveis() {
-        System.out.println("Menu Imoveis: \n");
-        System.out.println("1. Incluir");
-        System.out.println("2. Consultar");
-        System.out.println("3. Listar");
-        System.out.println("4. Excluir");
-        System.out.println("5. Alterar");
-        System.out.println("6. Voltar");
+    public static void menuImoveis(Scanner scanner) {
+        int opc;
+        
+        do{
+            System.out.println("Menu Imoveis: \n");
+            System.out.println("1. Incluir");
+            System.out.println("2. Consultar");
+            System.out.println("3. Listar");
+            System.out.println("4. Excluir");
+            System.out.println("5. Alterar");
+            System.out.println("6. Voltar");
+
+            System.out.print("\nDigite a opção desejada: ");
+            try{
+                opc = scanner.nextInt();
+                scanner.nextLine();
+            }catch(Exception e){
+                System.out.println("\n-----Erro de digitação-----\n");
+                break;
+            }
+
+            switch (opc) {
+                case 1:
+                    System.out.println("\nDigite a matricula do imovel:");
+                    String matricula = scanner.nextLine();
+
+                    System.out.println("Digite o endereco do imovel:");
+                    String endereco = scanner.nextLine();
+
+                    Imovel imovel = new Imovel(matricula, endereco);
+
+                    if(GestaoImoveis.addImovel(imovel)) {
+                        System.out.println("\nImovel adicionado com sucesso!");
+                    } else {
+                        System.out.println("\nImovel já cadastrado!");
+                    }
+                    break;
+                case 2:
+                    System.out.println("\nDigite a matricula do imovel:");
+                    String matricula1 = scanner.nextLine();
+
+                    Imovel imovel1 = GestaoImoveis.getImovel(matricula1);
+
+                    if(imovel1 != null) {
+                        System.out.println(imovel1.toString());
+                    } else {
+                        System.out.println("\nImovel não encontrado!");
+                    }
+                    break;
+                case 3:
+                    System.out.println("\nLista de imoveis: ");
+                    GestaoImoveis.ListarImoveis();
+                    break;
+                case 4:
+                    System.out.println("\nDigite a matricula do imovel:");
+                    String matricula2 = scanner.nextLine();
+
+                    Imovel imovel2 = GestaoImoveis.getImovel(matricula2);
+
+                    if(GestaoImoveis.removeImovel(imovel2)) {
+                        System.out.println("\nImovel removido com sucesso!");
+                    } else {
+                        System.out.println("\nImovel nao encontrado!");
+                    }
+                    break;
+                case 5:
+                    System.out.println("\nDigite a matricula do imovel:");
+                    String matricula3 = scanner.nextLine();
+
+                    Imovel imovel3 = GestaoImoveis.getImovel(matricula3);
+
+                    if(imovel3 != null) {
+                        System.out.println(imovel3.toString());
+
+                        System.out.println("\nDigite o novo endereco do imovel:");
+                        String novoEndereco = scanner.nextLine();
+        
+                        imovel3.setEndereco(novoEndereco);
+        
+                        System.out.println("\nImovel alterado com sucesso!");
+                    } else {
+                        System.out.println("\nImovel não encontrado!");
+                    }
+                    break;
+                case 6:
+                    return;
+                default:
+                    System.out.println("\nEscolha invalida, tente novamente");
+                    break;
+            }
+        }while(true);
     }
 
     public static void menuFaturas() {
