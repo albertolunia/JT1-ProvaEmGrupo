@@ -1,17 +1,19 @@
-package empresaEnergia;
+package EmpresaEnergia.src;
 
-public class Clientes {
+import java.util.ArrayList;
 
-	private String cpf,nome;
-	
-	//Construtor
-	public Clientes(String cpf, String nome) {
-		super();
+
+public class Cliente {
+	private String cpf;
+	private String nome;
+	private ArrayList<Imovel> imoveis;
+
+	public Cliente(String cpf, String nome) {
 		this.cpf = cpf;
 		this.nome = nome;
+		this.imoveis = new ArrayList<>();
 	}
 
-	//Gets e Sets
 	public String getCpf() {
 		return cpf;
 	}
@@ -27,6 +29,22 @@ public class Clientes {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
+
+	public void alterarCliente(String cpf, String nome) {
+		this.cpf = cpf;
+		this.nome = nome;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente " + nome + " CPF= " + cpf + ", Imoveis=" + imoveis;
+	}
+
+	public ArrayList<Imovel> getImoveis() {
+		return imoveis;
+	}
+
+	public boolean addImovel(Imovel imovel) {
+		return imoveis.add(imovel);
+	}
 }
