@@ -163,6 +163,15 @@ public class Menus {
 
                     System.out.println("\nDigite o novo CPF do cliente:");
                     String novoCpf = scanner.next();
+
+                    if(GestaoClientes.getCliente(novoCpf) != null) {
+                        System.out.println("\nCPF já cadastrado!");
+                        menuClientes();
+                        break;
+                    } else {
+                        cliente4.setCpf(novoCpf);
+                    }
+                    
                     System.out.println("\nDigite o novo nome do cliente:");
                     String novoNome = scanner.next();
     

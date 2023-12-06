@@ -45,6 +45,9 @@ public class Cliente {
 	}
 
 	public boolean addImovel(Imovel imovel) {
+		if (imoveis.contains(imovel)) {
+			return false;
+		}
 		return imoveis.add(imovel);
 	}
 }

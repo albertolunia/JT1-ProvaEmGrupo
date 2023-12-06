@@ -6,6 +6,9 @@ public class GestaoClientes {
     static ArrayList<Cliente> clientes = new ArrayList<>();
 
     public static boolean addCliente(Cliente cliente) {
+        if (getCliente(cliente.getCpf()) != null) {
+            return false;
+        }
         return clientes.add(cliente);
     }
 
