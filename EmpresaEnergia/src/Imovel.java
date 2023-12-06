@@ -65,6 +65,13 @@ public class Imovel {
 	}
 
 
+	// toString
+	@Override
+	public String toString() {
+		return "[matricula=" + matricula + ", endereco=" + endereco + ", ultLeitura=" + ultLeitura
+				+ ", penLeitura=" + String.valueOf(penLeitura) + ", numero de faturas=" + faturas.size() + ", numero de falhas=" + falhas.size() + "]";
+	}
+
 
 
 	
