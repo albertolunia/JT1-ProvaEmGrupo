@@ -62,6 +62,9 @@ public class Imovel {
 		return falhas;
 	}
 
+	public Fatura getUltimFatura() {
+		return faturas.get(faturas.size() - 1);
+	}
 
 	// toString
 	@Override

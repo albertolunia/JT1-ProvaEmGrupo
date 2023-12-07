@@ -36,7 +36,7 @@ public class Menus {
                     menuImoveis(scanner);
                     break;
                 case 3:
-                    menuFaturas();
+                    menuFaturas(scanner);
                     break;
                 case 4:
                     menuPagamentos();
@@ -280,11 +280,65 @@ public class Menus {
         }while(true);
     }
 
-    public static void menuFaturas() {
-        System.out.println("Menu Fatura\n");
-        System.out.println("1. Criar");
-        System.out.println("2. Listar todas");
-        System.out.println("3. Listar em aberto");
+    public static void menuFaturas(Scanner scanner) {
+        int opc;
+        
+        do{
+            System.out.println("Menu Fatura\n");
+            System.out.println("1. Criar");
+            System.out.println("2. Listar todas");
+            System.out.println("3. Listar em aberto");
+            System.out.println("4. Voltar");
+
+            System.out.print("\nDigite a opção desejada: ");
+            try{
+                opc = scanner.nextInt();
+                scanner.nextLine();
+            }catch(Exception e){
+                System.out.println("\n-----Erro de digitação-----\n");
+                break;
+            }
+
+            switch (opc) {
+                case 1:
+                    System.out.println("\nDigite a matricula do imovel:");
+                    String matricula = scanner.nextLine();
+
+                    Imovel imovel = GestaoImoveis.getImovel(matricula);
+
+                    if(imovel != null) {
+                        System.out.println("\nDigite a ultima leitura:");
+                        int ultimaLeitura = scanner.nextInt();
+                        scanner.nextLine();
+
+                        imovel.realizarLeitura(ultimaLeitura);
+
+                        Fatura fatura = imovel.getUltimFatura();
+
+                        GestaoFatura.addFatura(fatura);
+
+                        System.out.println("\nFatura criada com sucesso!");
+                        System.out.println(fatura.toString());
+                    } else {
+                        System.out.println("\nImovel não encontrado!");
+                    }
+                    break;
+                case 2:
+                    System.out.println("\nLista de faturas: ");
+                    GestaoFatura.listarTodasFaturas();
+                    break;
+                case 3:
+                    System.out.println("\nLista de faturas em aberto: ");
+                    GestaoFatura.listarFaturasEmAberto();
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("\nEscolha invalida, tente novamente");
+                    break;
+            }
+        }while(true);
+        
 
     }
 

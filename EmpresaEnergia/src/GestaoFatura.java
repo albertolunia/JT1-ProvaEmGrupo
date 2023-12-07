@@ -6,22 +6,20 @@ import java.util.stream.Collectors;
 
 public class GestaoFatura {
     
-        private List<Fatura> faturas = new ArrayList<>();
+        private static List<Fatura> faturas = new ArrayList<>();
     
     
-        public Fatura criarFatura(int ultimaLeitura, int penultimaLeitura) {
-            Fatura fatura = new Fatura(ultimaLeitura, penultimaLeitura);
-            faturas.add(fatura);
-            return fatura;
+        public static boolean addFatura(Fatura fatura) {
+            return faturas.add(fatura);
         }
     
-        public void listarTodasFaturas() {
+        public static void listarTodasFaturas() {
             for (Fatura fatura : faturas) {
                 System.out.println(fatura);
             }
         }
     
-        public void listarFaturasEmAberto() {
+        public static void listarFaturasEmAberto() {
             List<Fatura> faturasEmAberto = faturas.stream()
                     .filter(fatura -> !fatura.isQuitado())
                     .collect(Collectors.toList());
