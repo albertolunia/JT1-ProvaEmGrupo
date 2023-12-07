@@ -3,13 +3,25 @@ package EmpresaEnergia.src;
 
 import java.util.Date;
 
-public class Reparo extends Falha {
+public class Reparo {
 	
 	private boolean resolvido;
+	private String descricao;
+	private int previsao;
+	private LocalDate dataInicio;	
+	private LocalDate dataFim;
 
-	public Reparo(String descricao, int previsao, Date dataInicio, Date dataFim,boolean resolvido) {
-		super(descricao, previsao, dataInicio, dataFim);
-		this.setResolvido(resolvido);
+
+
+	public Reparo(String descricao, int previsao, LocalDate dataInicio) {
+		super();
+		this.setResolvido(false);
+		this.descricao = descricao;
+		this.previsao = previsao;
+		this.dataInicio = dataInicio;
+		this.dataFim = null;
+
+
 	}
 
 	public boolean isResolvido() {
