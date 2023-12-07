@@ -70,6 +70,10 @@ public class Imovel {
 				+ ", penLeitura=" + String.valueOf(penLeitura) + ", numero de faturas=" + faturas.size() + ", numero de falhas=" + falhas.size() + "]";
 	}
 
+	public String toShortString(){
+		return "[matricula=" + matricula + ", endereco=" + endereco + " ]";
+	}
+
 
 
 	

@@ -37,7 +37,11 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente " + nome + " CPF= " + cpf + ", Imoveis=" + imoveis;
+		String listaImoveis = "";
+		for (Imovel imovel : imoveis) {
+			listaImoveis += imovel.toShortString() + " ";
+		}
+		return "Cliente " + nome + " CPF= " + cpf + ", Imoveis=" + listaImoveis;
 	}
 
 	public ArrayList<Imovel> getImoveis() {
