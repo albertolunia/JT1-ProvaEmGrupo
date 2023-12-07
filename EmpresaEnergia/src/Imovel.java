@@ -73,6 +73,23 @@ public class Imovel {
 	public String toShortString(){
 		return "[matricula=" + matricula + ", endereco=" + endereco + " ]";
 	}
+	public void addFalha(Falha falha) {
+		this.falhas.add(falha);
+	}
+
+	public void ListarReparosEmAberto(){
+        for (Falha falha : this.falhas) {
+            if (falha instanceof FalhaDistribuicao) {
+                FalhaDistribuicao falhaDistribuicao = (FalhaDistribuicao) falha;
+                for (Reparo reparo : falhaDistribuicao.getReparos()) {
+                    if (!reparo.isFinalizado()) {
+                        System.out.print("Matricula: "+ falha.getMatricula()+ " ");
+                        System.out.print(reparo.toString()+ "\n");
+                    }
+                }
+            }
+        }
+    }
 	public void ListarReparosEmAbertoComID(){
 		int id = 0;
         for (Falha falha : this.falhas) {
