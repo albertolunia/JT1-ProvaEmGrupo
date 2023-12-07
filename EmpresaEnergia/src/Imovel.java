@@ -111,6 +111,25 @@ public class Imovel {
 			System.out.println(falha.toString());
 		}
 	}
+
+	public void consertarFalha(int id){
+		int idAtual = 0;
+		for (Falha falha : this.falhas) {
+			if (falha instanceof FalhaDistribuicao) {
+				FalhaDistribuicao falhaDistribuicao = (FalhaDistribuicao) falha;
+				for (Reparo reparo : falhaDistribuicao.getReparos()) {
+					if (!reparo.isResolvido()) {
+						if (id == idAtual){
+							reparo.consertarReparo();
+							falha.consertarFalha();
+							return;
+						}
+					}
+					idAtual++;
+				}
+			}
+		}
+	}
 	public void encerraReparo(int id){
 		int idAtual = 0;
 		for (Falha falha : this.falhas) {
@@ -128,6 +147,7 @@ public class Imovel {
 			}
 		}
 	}
+
 	public int getFalhaByReparo(int idReparo){
 		int idAtual = 0;
 		int idFalha = 0;
