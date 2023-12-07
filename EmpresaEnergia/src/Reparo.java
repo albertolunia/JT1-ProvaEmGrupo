@@ -1,6 +1,7 @@
 package EmpresaEnergia.src;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Reparo {
@@ -31,12 +32,17 @@ public class Reparo {
 	public void setResolvido(boolean resolvido) {
 		this.resolvido = resolvido;
 	}
+	public void consertarReparo(){
+		this.setResolvido(true);
+		this.dataFim = LocalDate.now();
+	}
 	public void finalizaReparo(){
 		this.dataFim = LocalDate.now();
 	}
 	public boolean isFinalizado(){
 		return this.dataFim != null;
 	}
+
 	
 	@Override
 	public String toString() {
