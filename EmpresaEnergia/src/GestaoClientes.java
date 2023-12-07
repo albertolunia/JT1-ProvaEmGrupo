@@ -3,7 +3,7 @@ package EmpresaEnergia.src;
 import java.util.ArrayList;
 
 public class GestaoClientes {
-    static ArrayList<Cliente> clientes = new ArrayList<>();
+    private static ArrayList<Cliente> clientes = new ArrayList<>();
 
     public static boolean addCliente(Cliente cliente) {
         return clientes.add(cliente);

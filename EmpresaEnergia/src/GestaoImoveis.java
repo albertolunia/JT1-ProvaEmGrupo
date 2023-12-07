@@ -3,7 +3,7 @@ package EmpresaEnergia.src;
 import java.util.ArrayList;
 
 public class GestaoImoveis {
-    static ArrayList<Imovel> imoveis = new ArrayList<>();
+    private static ArrayList<Imovel> imoveis = new ArrayList<>();
 
     public static boolean addImovel(Imovel imovel) {
         if (getImovel(imovel.getMatricula()) != null)

@@ -47,5 +47,10 @@ public class Fatura {
 		this.quitado = true;
 	}
 	
+	@Override
+	public String toString() {
+		return "[data=" + data + ", valor=" + String.valueOf(valor) + ", gasto = " + String.valueOf(ultimaLeitura - penultimaLeitura) + "quitadao =" + quitado + 
+		"]";
+	}
 	
 }
