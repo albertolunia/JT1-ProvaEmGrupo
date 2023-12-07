@@ -1,12 +1,25 @@
 package EmpresaEnergia.src;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 public class FalhaDistribuicao extends Falha{
+	private ArrayList<Reparo> reparos;
 
-	public FalhaDistribuicao(String descricao, int previsao, Date dataInicio, Date dataFim) {
-		super(descricao, previsao, dataInicio, dataFim);
-		
+	public FalhaDistribuicao(String descricao, String previsao) {
+		super(descricao, previsao);
+		this.reparos = new ArrayList<Reparo>();
+	}
+	public FalhaDistribuicao(String descricao, String previsao, String matricula) {
+		super(descricao, previsao, matricula);
+		this.reparos = new ArrayList<Reparo>();
+	}
+
+	public ArrayList<Reparo> getReparos() {
+		return reparos;
+	}
+
+	public void addReparo(Reparo reparo) {
+		this.reparos.add(reparo);
 	}
 
 }

@@ -1,13 +1,13 @@
 package EmpresaEnergia.src;
 
 
-import java.util.Date;
-
 public class FalhaGeracao extends Falha{
 
-	public FalhaGeracao(String descricao, int previsao, Date dataInicio, Date dataFim) {
-		super(descricao, previsao, dataInicio, dataFim);
-		
+	public FalhaGeracao(String descricao, String previsao) {
+		super(descricao, previsao);
+	}
+	public FalhaGeracao(String descricao, String previsao, String matricula) {
+		super(descricao, previsao, matricula);
 	}
 	
 

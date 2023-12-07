@@ -1,22 +1,23 @@
 package EmpresaEnergia.src;
 
+import java.time.LocalDate;
 
-import java.util.Date;
-
-public class Falha {
-
+public abstract class Falha {
+	private String matricula;
+	private String previsao;
 	private String descricao;
-	private int previsao;
-	private Date dataInicio;
-	private Date dataFim;
+	private LocalDate dataInicio;
+	private LocalDate dataFim;
 	
 	//Construtor
-	public Falha(String descricao, int previsao, Date dataInicio, Date dataFim) {
-		super();
+	public Falha(String descricao, String previsao) {
+		this(descricao, previsao, "");
+	}
+	public Falha(String descricao, String previsao, String matricula) {
 		this.descricao = descricao;
 		this.previsao = previsao;
-		this.dataInicio = dataInicio;
-		this.dataFim = dataFim;
+		this.matricula = matricula;
+		this.dataInicio = LocalDate.now();
 	}
 
 	//Gets e Sets
@@ -28,28 +29,29 @@ public class Falha {
 		this.descricao = descricao;
 	}
 
-	public int getPrevisao() {
+	public String getPrevisao() {
 		return previsao;
 	}
 
-	public void setPrevisao(int previsao) {
+	public void setPrevisao(String previsao) {
 		this.previsao = previsao;
 	}
 
-	public Date getDataInicio() {
+	// data de inicio nao pode ser alterada
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public Date getDataFim() {
+	public LocalDate getDataFim() {
 		return dataFim;
 	}
+	public void consertarFalha() {
+		this.dataFim = LocalDate.now();
+	}
 
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
+	// matricula nao pode ser alterada
+	public String getMatricula() {
+		return matricula;
 	}
 	
 
