@@ -4,22 +4,20 @@ import java.time.LocalDate;
 
 public abstract class Falha {
 	private String matricula;
-	private String previsao;
 	private String descricao;
 	private LocalDate dataInicio;
 	private LocalDate dataFim;
 	
 	//Construtor
-	public Falha(String descricao, String previsao) {
-		this(descricao, previsao, "");
+	public Falha(String descricao) {
+		this(descricao, "");
 	}
-	public Falha(String descricao, String previsao, String matricula) {
+	public Falha(String descricao, String matricula) {
 		this.descricao = descricao;
-		this.previsao = previsao;
 		this.matricula = matricula;
 		this.dataInicio = LocalDate.now();
+		this.dataFim = null;
 	}
-
 	//Gets e Sets
 	public String getDescricao() {
 		return descricao;
@@ -29,13 +27,7 @@ public abstract class Falha {
 		this.descricao = descricao;
 	}
 
-	public String getPrevisao() {
-		return previsao;
-	}
 
-	public void setPrevisao(String previsao) {
-		this.previsao = previsao;
-	}
 
 	// data de inicio nao pode ser alterada
 	public LocalDate getDataInicio() {
