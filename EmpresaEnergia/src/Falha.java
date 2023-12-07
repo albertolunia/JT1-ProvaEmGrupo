@@ -54,5 +54,10 @@ public abstract class Falha {
 		return matricula;
 	}
 	
+	@Override
+	public String toString() {
+		return "[matricula=" + matricula + ", descricao=" + descricao + ", dataInicio=" + dataInicio
+				+ ", dataFim=" + dataFim + "]";
+	}
 
 }
