@@ -299,14 +299,76 @@ public class Menus {
     public static void menuFalha() {
         System.out.println("Menu Falha:\n");
         System.out.println("1. Incluir Falha");
-        System.out.println("2. menuReparos()");
+    public static void menuReparos(Scanner scanner) {
+        int opc;
+        do{
 
-    }
-
-    public static void menuReparos() {
         System.out.println("Menu Reparo:\n");
         System.out.println("1. Listar em aberto");
         System.out.println("2. Encerrar reparo");
+            System.out.println("0. Voltar");
+            opc= scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opc) {
+                case 1:
+                    System.out.println("Lista de reparos em aberto: ");
+                    GestaoImoveis.ListarReparosEmAberto();
+                    break;
+                case 2:
+                    System.out.println("Digite a matricula do imovel:");
+                    String matricula = scanner.nextLine();
+                    Imovel imovel = GestaoImoveis.getImovel(matricula);
+
+                    if(imovel != null) {
+                        imovel.ListarReparosEmAbertoComID();
+                        System.out.println("Digite o ID do reparo:");
+                        int id = scanner.nextInt();
+                        scanner.nextLine();
+
+                        System.out.println("A falha foi resolvida?");
+                        System.out.println("1- Sim");
+                        System.out.println("2- Não");
+                        int opc2 = scanner.nextInt();
+                        scanner.nextLine();
+
+                        if(opc2 == 1)
+                            imovel.consertarFalha(id);
+                        else if(opc2 == 2){
+
+                            imovel.encerraReparo(id);
+                            int posicao= imovel.getFalhaByReparo(id);
+                            if(posicao != -1){
+                                System.out.println("Digite a descricao do novo reparo:");
+                                String descricao = scanner.nextLine();
+                                System.out.println("Digite a nova previsao (em dias):");
+                                int previsao = scanner.nextInt();
+                                scanner.nextLine();
+                                System.out.println("Digite a nova data de inicio (no formato dd/MM/yyyy):");
+                                String inputData = scanner.nextLine();
+
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                                LocalDate dataInicio = LocalDate.parse(inputData, formatter);
+                                Reparo reparo = new Reparo(descricao, previsao, dataInicio);
+                                ((FalhaDistribuicao)imovel.getFalhas().get(posicao)).addReparo(reparo);
+                                System.out.println("Reparo adicionado com sucesso!");
+                            }
+                            
+                        }
+                        else
+                            System.out.println("Opção invalida!");
+                        
+                    } else {
+                        System.out.println("Imovel não encontrado!");
+                    }
+                    break;
+                case 0:
+                    return;
+                default:
+                    return;
+               
+            }
+        }while(opc != 0);
 
     }
 }
