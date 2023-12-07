@@ -1,14 +1,22 @@
 package EmpresaEnergia.src;
 
+import java.time.LocalDate;
+
 public class Reembolso {
 
-	protected Fatura fatura;
+	private float valor;
+	private LocalDate data;
 
-	public Fatura getFatura() {
-		return fatura;
+	public Reembolso(float valor) {
+		this.valor = valor;
+		this.data = LocalDate.now();
 	}
 
-	public void setFatura(Fatura fatura) {
-		this.fatura = fatura;
+	public float getValor() {
+		return valor;
+	}
+
+	public LocalDate getData() {
+		return data;
 	}
 }
