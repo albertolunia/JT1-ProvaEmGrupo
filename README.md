@@ -1,2 +1,9 @@
-# JT1-ProvaEmGrupo
-Repositorio para a prova em grupo de java T1 - Residencia em software
+# Repositório: Projeto de Avaliação - Java T1
+
+## Desenvolvimento de Modulo de Gestão para Empresa Distribuidora de Energia: COELHO Ltda
+### Desenvolvedores
+    Alberto Henrique
+    Beatriz Pereira
+    Everaldina Barbosa
+    Matheus Fonseca
+
