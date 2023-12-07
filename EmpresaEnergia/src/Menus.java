@@ -1,5 +1,7 @@
 package EmpresaEnergia.src;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 
@@ -7,8 +9,8 @@ public class Menus {
 
     public static void menuPrincipal() {
         int opcao;
-        Scanner scanner = new Scanner(System.in);
         do{
+            Scanner scanner = new Scanner(System.in);
             System.out.println("Menu Principal:\n");
             System.out.println("1. Menu Clientes");
             System.out.println("2. Menu Imoveis");
@@ -40,7 +42,7 @@ public class Menus {
                     menuPagamentos();
                     break;
                 case 5:
-                    menuFalha();
+                    menuFalha(scanner);
                     break;
                 case 6:
                     scanner.close();
@@ -296,16 +298,90 @@ public class Menus {
 
     }
 
-    public static void menuFalha() {
-        System.out.println("Menu Falha:\n");
-        System.out.println("1. Incluir Falha");
+    public static void menuFalha(Scanner scanner) {
+        int opc;
+        do{
+
+            System.out.println("Menu Falha:\n");
+            System.out.println("1. Incluir Falha");
+            System.out.println("2. Listar Falhas");
+            System.out.println("3. Menu de Reparos");
+            System.out.println("0. Voltar");
+            opc = scanner.nextInt();
+            scanner.nextLine();
+
+            switch(opc){
+                case 1:
+                    System.out.println("Digite a matricula do imovel:");
+                    String matricula = scanner.nextLine();
+
+                    Imovel imovel = GestaoImoveis.getImovel(matricula);
+
+                    if(imovel != null) {
+                        System.out.println("Digite a descricao da falha:");
+                        String descricao = scanner.nextLine();
+
+                        System.out.println("Digite o tipo da falha:");
+                        System.out.println("1- Geração");
+                        System.out.println("2- Distribuição");
+                        int tipo = scanner.nextInt();
+                        scanner.nextLine();
+
+                        switch(tipo){
+                            case 1:
+                                FalhaGeracao falhaGeracao = new FalhaGeracao(descricao, matricula);
+                                imovel.addFalha(falhaGeracao);
+                                System.out.println("Falha adicionada com sucesso!");
+                                break;
+                            case 2:
+                                FalhaDistribuicao falhaDistribuicao = new FalhaDistribuicao(descricao, matricula);
+                                System.out.println("Digite a descricao do reparo:");
+                                descricao = scanner.nextLine();
+                                System.out.println("Digite a previsao (em dias):");
+                                int previsao = scanner.nextInt();
+                                scanner.nextLine();
+                                System.out.println("Digite a data de inicio (no formato dd/MM/yyyy):");
+                                String inputData = scanner.nextLine();
+
+                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                                LocalDate dataInicio = LocalDate.parse(inputData, formatter);
+                                Reparo reparo = new Reparo(descricao, previsao, dataInicio);
+                                falhaDistribuicao.addReparo(reparo);
+                                imovel.addFalha(falhaDistribuicao);
+                                System.out.println("Falha (distribuição) adicionada com sucesso!");
+
+                                break;
+                            default:
+                                System.out.println("Tipo de falha invalido!");
+                                break;
+                        }
+                    } else {
+                        System.out.println("Imovel não encontrado!");
+                    }
+                    break;
+                case 2:
+                    System.out.println("Lista de falhas: ");
+                    GestaoImoveis.ListarFalhas();
+                    break;
+                
+                case 3:
+                    menuReparos(scanner);
+                    break;
+                default:
+                    return;
+            }
+        }while(opc != 0);
+
+
+    }
+
     public static void menuReparos(Scanner scanner) {
         int opc;
         do{
 
-        System.out.println("Menu Reparo:\n");
-        System.out.println("1. Listar em aberto");
-        System.out.println("2. Encerrar reparo");
+            System.out.println("Menu Reparo:\n");
+            System.out.println("1. Listar em aberto");
+            System.out.println("2. Encerrar reparo");
             System.out.println("0. Voltar");
             opc= scanner.nextInt();
             scanner.nextLine();
