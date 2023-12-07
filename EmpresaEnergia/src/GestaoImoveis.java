@@ -33,4 +33,10 @@ public class GestaoImoveis {
             System.out.println(imovel.toString());
         }
     }
+    public static void ListarReparosEmAberto(){
+        for (Imovel imovel : imoveis) {
+            imovel.ListarReparosEmAberto();
+        }
+
+    }
 }
