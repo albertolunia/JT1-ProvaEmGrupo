@@ -45,8 +45,8 @@ public abstract class Falha {
 	public LocalDate getDataFim() {
 		return dataFim;
 	}
-	public void consertarFalha() {
-		this.dataFim = LocalDate.now();
+	protected void consertarFalha() {
+		dataFim = LocalDate.now();
 	}
 
 	// matricula nao pode ser alterada
