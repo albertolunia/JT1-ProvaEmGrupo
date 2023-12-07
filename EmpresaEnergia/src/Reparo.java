@@ -19,6 +19,12 @@ public class Reparo extends Falha {
 	public void setResolvido(boolean resolvido) {
 		this.resolvido = resolvido;
 	}
+	public void finalizaReparo(){
+		this.dataFim = LocalDate.now();
+	}
+	public boolean isFinalizado(){
+		return this.dataFim != null;
+	}
 	
 	@Override
 	public String toString() {
