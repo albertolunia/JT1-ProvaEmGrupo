@@ -6,7 +6,7 @@ public class Imovel {
 
    private String matricula;
    private String endereco;
-   private int ultLeitura, penLeitura;
+   private float ultLeitura, penLeitura;
    private ArrayList<Fatura> faturas;
    private ArrayList<Falha> falhas;
 
@@ -26,11 +26,14 @@ public class Imovel {
 
 	// recebe a leitura atual e retorna o gasto do periodo
 	// metodo atualiza os valores de ultLeitura e penLeitura
-	public int realizarLeitura(int leituraAtual) {
-		int gasto = leituraAtual - this.ultLeitura;
-		faturas.add(new Fatura(this.ultLeitura, this.penLeitura));
+	public float realizarLeitura(float leituraAtual) {
+		if (leituraAtual < this.ultLeitura) {
+			return -1;
+		}
+		float gasto = leituraAtual - this.ultLeitura;
 		this.penLeitura = this.ultLeitura;
 		this.ultLeitura = leituraAtual;
+		faturas.add(new Fatura(this.ultLeitura, this.penLeitura));
 		return gasto;
 	}
 	
@@ -47,10 +50,10 @@ public class Imovel {
 		return matricula;
 	}
 	// nao existe set para ultLeitura e penLeitura pois eles sao atualizados pelo metodo realizarLeitura
-	public int getUltLeitura() {
+	public float getUltLeitura() {
 		return ultLeitura;
 	}
-	public int getPenLeitura() {
+	public float getPenLeitura() {
 		return penLeitura;
 	}
 
@@ -62,7 +65,7 @@ public class Imovel {
 		return falhas;
 	}
 
-	public Fatura getUltimFatura() {
+	public Fatura getUltimaFatura() {
 		return faturas.get(faturas.size() - 1);
 	}
 

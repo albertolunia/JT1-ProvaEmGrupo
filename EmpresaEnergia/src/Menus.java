@@ -311,9 +311,18 @@ public class Menus {
                         int ultimaLeitura = scanner.nextInt();
                         scanner.nextLine();
 
-                        imovel.realizarLeitura(ultimaLeitura);
+                        if (!imovel.getUltimaFatura().isQuitado()) {
+                            System.out.println("\nFatura anterior não quitada!");
+                            break;
+                        }
 
-                        Fatura fatura = imovel.getUltimFatura();
+                        float gasto = imovel.realizarLeitura(ultimaLeitura);
+                        
+                        if (gasto < 0) {
+                            System.out.println("\nLeitura invalida!");
+                            break;
+                        }
+                        Fatura fatura = imovel.getUltimaFatura();
 
                         GestaoFatura.addFatura(fatura);
 

@@ -7,11 +7,11 @@ public class Fatura {
 	private LocalDate data;
 	private float valor;
 	private boolean quitado;
-	private int ultimaLeitura;
-	private int penultimaLeitura;
+	private float ultimaLeitura;
+	private float penultimaLeitura;
 
 	// construtor
-	public Fatura(int ultimaLeitura, int penultimaLeitura) {
+	public Fatura(float ultimaLeitura, float penultimaLeitura) {
 		this.data = LocalDate.now();
 		this.ultimaLeitura = ultimaLeitura;
 		this.penultimaLeitura = penultimaLeitura;
@@ -34,11 +34,11 @@ public class Fatura {
 		return quitado;
 	}
 
-	public int getUltimaLeitura() {
+	public float getUltimaLeitura() {
 		return ultimaLeitura;
 	}
 
-	public int getPenultimaLeitura() {
+	public float getPenultimaLeitura() {
 		return penultimaLeitura;
 	}
 
@@ -49,7 +49,7 @@ public class Fatura {
 	
 	@Override
 	public String toString() {
-		return "[data=" + data + ", valor=" + String.valueOf(valor) + ", gasto = " + String.valueOf(ultimaLeitura - penultimaLeitura) + "quitadao =" + quitado + 
+		return "[data=" + data + ", valor=" + String.valueOf(valor) + ", gasto = " + String.valueOf(ultimaLeitura - penultimaLeitura) + ", quitadao =" + quitado + 
 		"]";
 	}
 	
