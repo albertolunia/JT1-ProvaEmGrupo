@@ -39,4 +39,10 @@ public class GestaoImoveis {
         }
 
     }
+
+    public static void ListarFalhas(){
+        for (Imovel imovel : imoveis) {
+            imovel.ListarFalhas();
+        }
+    }
 }
