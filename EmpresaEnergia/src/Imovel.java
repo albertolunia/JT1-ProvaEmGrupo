@@ -73,6 +73,12 @@ public class Imovel {
 	public String toShortString(){
 		return "[matricula=" + matricula + ", endereco=" + endereco + " ]";
 	}
+
+	public void ListarFalhas(){
+		for (Falha falha : this.falhas) {
+			System.out.println(falha.toString());
+		}
+	}
 	public void encerraReparo(int id){
 		int idAtual = 0;
 		for (Falha falha : this.falhas) {
