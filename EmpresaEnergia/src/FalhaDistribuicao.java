@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class FalhaDistribuicao extends Falha{
 	private ArrayList<Reparo> reparos;
 
-	public FalhaDistribuicao(String descricao, String previsao) {
-		super(descricao, previsao);
+	public FalhaDistribuicao(String descricao) {
+		super(descricao);
 		this.reparos = new ArrayList<Reparo>();
 	}
-	public FalhaDistribuicao(String descricao, String previsao, String matricula) {
-		super(descricao, previsao, matricula);
+	public FalhaDistribuicao(String descricao, String matricula) {
+		super(descricao, matricula);
 		this.reparos = new ArrayList<Reparo>();
 	}
 
