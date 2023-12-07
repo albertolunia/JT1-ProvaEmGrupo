@@ -73,8 +73,27 @@ public class Imovel {
 	public String toShortString(){
 		return "[matricula=" + matricula + ", endereco=" + endereco + " ]";
 	}
-
-
+	public int getFalhaByReparo(int idReparo){
+		int idAtual = 0;
+		int idFalha = 0;
+		for (Falha falha : this.falhas) {
+			if (falha instanceof FalhaDistribuicao) {
+				FalhaDistribuicao falhaDistribuicao = (FalhaDistribuicao) falha;
+				for (Reparo reparo : falhaDistribuicao.getReparos()) {
+					if (!reparo.isResolvido()) {
+						if (idReparo == idAtual){
+							
+							return idFalha;
+						}
+					}
+					idAtual++;
+				}
+			
+			}
+			idFalha++;
+		}
+		return -1;
+	}
 
 	
 	
