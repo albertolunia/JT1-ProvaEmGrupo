@@ -28,4 +28,31 @@ public class GestaoFatura {
                 System.out.println(fatura);
             }
         }
+        public static void listarPagamentos(int id){
+            int idAtual = 0;
+            for (Fatura fatura : faturas) {
+                if (id == idAtual){
+                    fatura.listarPagamentos();
+                    return;
+                }
+                idAtual++;
+            }
+        }
+
+        public static void listarReembolso(int id){
+            int idAtual = 0;
+            for (Fatura fatura : faturas) {
+                if (id == idAtual){
+                    fatura.listarReembolso();
+                    return;
+                }
+                idAtual++;
+            }
+        }
+
+        public static void listarReembolsos(){
+            for (Fatura fatura : faturas) {
+                fatura.listarReembolso();
+            }
+        }
     }

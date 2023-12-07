@@ -34,6 +34,7 @@ public class Imovel {
 		this.penLeitura = this.ultLeitura;
 		this.ultLeitura = leituraAtual;
 		faturas.add(new Fatura(this.ultLeitura, this.penLeitura));
+		System.out.println("Fatura gerada: " + faturas.get(faturas.size() - 1));
 		return gasto;
 	}
 	
@@ -66,6 +67,9 @@ public class Imovel {
 	}
 
 	public Fatura getUltimaFatura() {
+		if (faturas.size() == 0) {
+			return null;
+		}
 		return faturas.get(faturas.size() - 1);
 	}
 
@@ -174,6 +178,19 @@ public class Imovel {
 			idFalha++;
 		}
 		return -1;
+	}
+
+	public void listarPagamentos(){
+		for (int i = 0; i < faturas.size(); i++) {
+			faturas.get(i).listarPagamentos();
+			
+		}
+	}
+	public void listarPagamentosComID(){
+		for (int i = 0; i < faturas.size(); i++) {
+			System.out.print("ID: "+ i + " " + faturas.get(i));
+			
+		}
 	}
 
 	

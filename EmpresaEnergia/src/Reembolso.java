@@ -19,4 +19,9 @@ public class Reembolso {
 	public LocalDate getData() {
 		return data;
 	}
+
+	@Override
+	public String toString() {
+		return "[valor=" + valor + ", data=" + data + "]";
+	}
 }

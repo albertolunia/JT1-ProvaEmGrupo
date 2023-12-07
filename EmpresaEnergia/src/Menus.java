@@ -39,7 +39,7 @@ public class Menus {
                     menuFaturas(scanner);
                     break;
                 case 4:
-                    menuPagamentos();
+                    menuPagamentos(scanner);
                     break;
                 case 5:
                     menuFalha(scanner);
@@ -311,7 +311,8 @@ public class Menus {
                         int ultimaLeitura = scanner.nextInt();
                         scanner.nextLine();
 
-                        if (!imovel.getUltimaFatura().isQuitado()) {
+                        Fatura fatura = imovel.getUltimaFatura();
+                        if (fatura != null && !imovel.getUltimaFatura().isQuitado()) {
                             System.out.println("\nFatura anterior não quitada!");
                             break;
                         }
@@ -322,7 +323,7 @@ public class Menus {
                             System.out.println("\nLeitura invalida!");
                             break;
                         }
-                        Fatura fatura = imovel.getUltimaFatura();
+                        fatura = imovel.getUltimaFatura();
 
                         GestaoFatura.addFatura(fatura);
 
@@ -351,13 +352,104 @@ public class Menus {
 
     }
 
-    public static void menuPagamentos() {
-        System.out.println("Menu Pagamento:\n");
-        System.out.println("1. Realizar pagamento");
-        System.out.println("2. Listar pagamentos");
-        System.out.println("3. Listar pagamentos por fatura");
-        System.out.println("4. Listar reembolsos");
-        System.out.println("5. Listar reembolsos por fatura");
+    public static void menuPagamentos(Scanner scanner) {
+        int opc;
+
+        do{
+            System.out.println("Menu Pagamento:\n");
+            System.out.println("1. Realizar pagamento");
+            System.out.println("2. Listar pagamentos");
+            System.out.println("3. Listar pagamentos por fatura");
+            System.out.println("4. Listar reembolsos");
+            System.out.println("5. Listar reembolsos por fatura");
+            System.out.println("0. Voltar");
+
+            System.out.print("\nDigite a opção desejada: ");
+            try{
+                opc = scanner.nextInt();
+                scanner.nextLine();
+            }catch(Exception e){
+                System.out.println("\n-----Erro de digitação-----\n");
+                break;
+            }
+
+            switch (opc) {
+                case 1:
+                    System.out.println("\nDigite a matricula do imovel:");
+                    String matricula = scanner.nextLine();
+
+                    Imovel imovel = GestaoImoveis.getImovel(matricula);
+
+                    if(imovel != null) {
+                        System.out.println("\nDigite o valor do pagamento:");
+                        float valor = scanner.nextFloat();
+                        scanner.nextLine();
+
+                        Pagamento pagamento = new Pagamento(valor, matricula);
+
+
+                        Fatura fatura = imovel.getUltimaFatura();
+                        if(!fatura.isQuitado()) {
+                            fatura.addPagamento(pagamento);
+                            System.out.println("\nPagamento realizado com sucesso!");
+                        } else {
+                            System.out.println("\nFatura já quitada");
+                        }
+                    } else {
+                        System.out.println("\nImovel não encontrado!");
+                    }
+                    break;
+                case 2:
+                    System.out.println("\nLista de pagamentos: ");
+                    GestaoImoveis.listarPagamentos();
+                    break;
+                case 3:
+                    System.out.println("\nDigite a matricula do imovel:");
+                    String matricula1 = scanner.nextLine();
+
+                    Imovel imovel1 = GestaoImoveis.getImovel(matricula1);
+
+                    if(imovel1 != null) {
+                        System.out.println("\nLista de pagamentos: ");
+                        imovel1.listarPagamentosComID();
+                        System.out.println("\nDigite o ID:");
+                        int id = scanner.nextInt();
+                        scanner.nextLine();
+                        GestaoFatura.listarPagamentos(id);
+
+                    } else {
+                        System.out.println("\nImovel não encontrado!");
+                    }
+                    break;
+                case 4:
+                    System.out.println("\nLista de reembolsos: ");
+                    GestaoFatura.listarReembolsos();
+                    break;
+                case 5:
+                    System.out.println("\nDigite a matricula do imovel:");
+                    String matricula2 = scanner.nextLine();
+
+                    Imovel imovel2 = GestaoImoveis.getImovel(matricula2);
+
+                    if(imovel2 != null) {
+                        System.out.println("\nLista de reembolsos: ");
+                        imovel2.listarPagamentosComID();
+                        System.out.println("\nDigite o ID:");
+                        int id = scanner.nextInt();
+                        scanner.nextLine();
+                        GestaoFatura.listarReembolso(id);
+
+                    } else {
+                        System.out.println("\nImovel não encontrado!");
+                    }
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("\nEscolha invalida, tente novamente");
+                    break;
+            }
+        }while(true);
 
     }
 

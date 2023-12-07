@@ -56,6 +56,10 @@ public class Fatura {
 		"]";
 	}
 
+	public Pagamento getUltimoPagamento() {
+		return pagamentos.get(pagamentos.size() - 1);
+	}
+
 	// metodos
 	// retorna o valor a ser pagado
 	public float calcularValorPendente(){
@@ -68,13 +72,30 @@ public class Fatura {
  
 
 	public void addPagamento(Pagamento pagamento) {
-		float valorPendente = calcularValorPendente();
 		pagamentos.add(pagamento);
+		float valorPendente = calcularValorPendente();
 		if (valorPendente <= 0)
 			quitarFatura();
 		if (valorPendente < 0)
 			pagamento.addReembolso(new Reembolso(-valorPendente));
 		
+		
+	}
+
+	public void listarPagamentos() {
+		for (Pagamento pagamento : pagamentos) {
+			System.out.println(pagamento.toString());
+		}
+	}
+
+	public void listarReembolso(){
+		Pagamento ultimo = getUltimoPagamento();
+		if(ultimo == null){
+			System.out.println("Nao ha reembolso");
+			return;
+		}else{
+			System.out.println("Reembolso: " + ultimo.getReembolso() );
+		}
 	}
 	
 }

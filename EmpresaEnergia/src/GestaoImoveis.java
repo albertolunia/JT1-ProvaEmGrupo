@@ -45,4 +45,10 @@ public class GestaoImoveis {
             imovel.ListarFalhas();
         }
     }
+
+    public static void listarPagamentos(){
+        for (Imovel imovel : imoveis) {
+            imovel.listarPagamentos();
+        }
+    }
 }
