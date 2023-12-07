@@ -19,4 +19,10 @@ public class Reparo extends Falha {
 	public void setResolvido(boolean resolvido) {
 		this.resolvido = resolvido;
 	}
+	
+	@Override
+	public String toString() {
+		return "[resolvido=" + resolvido + ", descricao=" + descricao + ", previsao=" + previsao
+				+ ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + "]";
+	}
 }
